@@ -6,7 +6,7 @@ mongo-cluster-node1:
   entrypoint: /opt/rancher/bin/entrypoint.sh
   command:
   - --replSet
-  - "${replset_name}"
+  - "${replset_name1}"
   image: mongo:3.2
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
@@ -23,7 +23,7 @@ mongo-cluster-node2:
   entrypoint: /opt/rancher/bin/entrypoint.sh
   command:
   - --replSet
-  - "${replset_name}"
+  - "${replset_name2}"
   image: mongo:3.2
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
@@ -40,7 +40,7 @@ mongo-cluster-node3:
   entrypoint: /opt/rancher/bin/entrypoint.sh
   command:
   - --replSet
-  - "${replset_name}"
+  - "${replset_name3}"
   image: mongo:3.2
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
