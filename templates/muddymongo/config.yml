@@ -1,5 +1,5 @@
 name: MuddyMongoDB
 description: |
-  MongoDB Replica Set.
-version: 3.2-rancher2
+  MuddyMongoDB Replica Set.
+version: 3.2-muddy2
 category: Databases
