@@ -32,23 +32,6 @@ mongo-cluster-node2:
   volumes_from:
     - mongo-datavolume-node1
     - mongo-base-node2
-mongo-cluster-node3:
-  restart: always
-  environment:
-    MONGO_SERVICE_NAME: mongo-cluster-node3
-  tty: true
-  entrypoint: /opt/rancher/bin/entrypoint.sh
-  command:
-  - --replSet
-  - "${replset_name}"
-  image: mongo:3.2
-  labels:
-    io.rancher.scheduler.affinity:host_label: ${host_label}
-    io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: mongo-base-node3, mongo-datavolume-node3
-  volumes_from:
-    - mongo-datavolume-node3
-    - mongo-base-node3
 mongo-base-node1:
   restart: always
   net: none
@@ -61,17 +44,6 @@ mongo-base-node1:
   stdin_open: true
   entrypoint: /bin/true
 mongo-base-node2:
-  restart: always
-  net: none
-  tty: true
-  labels:
-    io.rancher.scheduler.affinity:host_label: ${host_label}
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-  image: rancher/mongodb-conf:v0.1.0
-  stdin_open: true
-  entrypoint: /bin/true
-mongo-base-node3:
   restart: always
   net: none
   tty: true
@@ -100,15 +72,5 @@ mongo-datavolume-node2:
     io.rancher.container.start_once: true
   volumes:
     - /data/db2
-  entrypoint: /bin/true
-  image: busybox
-mongo-datavolume-node3:
-  net: none
-  labels:
-    io.rancher.scheduler.affinity:host_label: ${host_label}
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-  volumes:
-    - /data/db3
   entrypoint: /bin/true
   image: busybox

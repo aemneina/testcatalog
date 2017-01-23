@@ -32,10 +32,3 @@ mongo-cluster-node2:
     mongo:
       yml:
         replset.name: "${replset_name}"
-mongo-cluster-node3:
-  scale: 1
-  retain_ip: true
-  metadata:
-    mongo:
-      yml:
-        replset.name: "${replset_name}"
