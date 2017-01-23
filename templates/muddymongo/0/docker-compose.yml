@@ -11,7 +11,7 @@ mongo-cluster-node1:
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: mongo-base-node1, mongo-datavolume-node1
+    io.rancher.sidekicks: mongo-base, mongo-datavolume-node1
   volumes_from:
     - mongo-datavolume-node1
     - mongo-base-node1
@@ -28,9 +28,9 @@ mongo-cluster-node2:
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: mongo-base-node2, mongo-datavolume-node2
+    io.rancher.sidekicks: mongo-base, mongo-datavolume-node2
   volumes_from:
-    - mongo-datavolume-node1
+    - mongo-datavolume-node2
     - mongo-base-node2
 mongo-base-node1:
   restart: always
