@@ -1,0 +1,92 @@
+mongo-cluster-node1:
+  restart: always
+  environment:
+    MONGO_SERVICE_NAME: mongo-cluster
+  tty: true
+  entrypoint: /opt/rancher/bin/entrypoint.sh
+  command:
+  - --replSet
+  - "${replset_name}"
+  image: mongo:3.2
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: mongo-base, mongo-datavolume1
+  volumes_from:
+    - mongo-datavolume
+    - mongo-base
+mongo-cluster-node2:
+  restart: always
+  environment:
+    MONGO_SERVICE_NAME: mongo-cluster
+  tty: true
+  entrypoint: /opt/rancher/bin/entrypoint.sh
+  command:
+  - --replSet
+  - "${replset_name}"
+  image: mongo:3.2
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: mongo-base, mongo-datavolume2
+  volumes_from:
+    - mongo-datavolume
+    - mongo-base
+mongo-cluster-node3:
+  restart: always
+  environment:
+    MONGO_SERVICE_NAME: mongo-cluster
+  tty: true
+  entrypoint: /opt/rancher/bin/entrypoint.sh
+  command:
+  - --replSet
+  - "${replset_name}"
+  image: mongo:3.2
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: mongo-base, mongo-datavolume3
+  volumes_from:
+    - mongo-datavolume
+    - mongo-base
+mongo-base:
+  restart: always
+  net: none
+  tty: true
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  image: rancher/mongodb-conf:v0.1.0
+  stdin_open: true
+  entrypoint: /bin/true
+mongo-datavolume1:
+  net: none
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  volumes:
+    - /data/db1
+  entrypoint: /bin/true
+  image: busybox
+mongo-datavolume2:
+  net: none
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  volumes:
+    - /data/db2
+  entrypoint: /bin/true
+  image: busybox
+mongo-datavolume3:
+  net: none
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  volumes:
+    - /data/db3
+  entrypoint: /bin/true
+  image: busybox
