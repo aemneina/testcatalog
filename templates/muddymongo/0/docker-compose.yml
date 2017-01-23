@@ -49,7 +49,7 @@ mongo-cluster-node3:
   volumes_from:
     - mongo-datavolume-node3
     - mongo-base-node3
-mongo-base-node-1:
+mongo-base-node1:
   restart: always
   net: none
   tty: true
