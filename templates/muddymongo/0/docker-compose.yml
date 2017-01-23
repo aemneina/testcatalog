@@ -11,10 +11,10 @@ mongo-cluster-node1:
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: mongo-base, mongo-datavolume-node1
+    io.rancher.sidekicks: mongo-base-node1, mongo-datavolume-node1
   volumes_from:
     - mongo-datavolume-node1
-    - mongo-base
+    - mongo-base-node1
 mongo-cluster-node2:
   restart: always
   environment:
@@ -28,10 +28,10 @@ mongo-cluster-node2:
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: mongo-base, mongo-datavolume-node2
+    io.rancher.sidekicks: mongo-base-node2, mongo-datavolume-node2
   volumes_from:
     - mongo-datavolume-node1
-    - mongo-base
+    - mongo-base-node2
 mongo-cluster-node3:
   restart: always
   environment:
@@ -45,11 +45,33 @@ mongo-cluster-node3:
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: mongo-base, mongo-datavolume-node3
+    io.rancher.sidekicks: mongo-base-node3, mongo-datavolume-node3
   volumes_from:
     - mongo-datavolume-node3
-    - mongo-base
-mongo-base:
+    - mongo-base-node3
+mongo-base-node-1:
+  restart: always
+  net: none
+  tty: true
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  image: rancher/mongodb-conf:v0.1.0
+  stdin_open: true
+  entrypoint: /bin/true
+mongo-base-node2:
+  restart: always
+  net: none
+  tty: true
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  image: rancher/mongodb-conf:v0.1.0
+  stdin_open: true
+  entrypoint: /bin/true
+mongo-base-node3:
   restart: always
   net: none
   tty: true
