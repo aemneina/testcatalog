@@ -24,18 +24,18 @@ mongo-cluster-node1:
   metadata:
     mongo:
       yml:
-        replset.name: "${replset_name}"
+        replset.name: "${replset_name1}"
 mongo-cluster-node2:
   scale: 1
   retain_ip: true
   metadata:
     mongo:
       yml:
-        replset.name: "${replset_name}"
+        replset.name: "${replset_name2}"
 mongo-cluster-node3:
   scale: 1
   retain_ip: true
   metadata:
     mongo:
       yml:
-        replset.name: "${replset_name}"
+        replset.name: "${replset_name3}"
