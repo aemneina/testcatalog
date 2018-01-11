@@ -1,1 +1,2 @@
-# testcatalog
+# custom-catalog
+Customized Rancher Catalog
