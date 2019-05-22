@@ -1,0 +1,10 @@
+bonkmoney:
+  tty: true
+  image: eboraas/apache
+  stdin_open: true
+dudemoney:
+  stdin_open: true
+  labels:
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=apatchysrv
+  tty: true
+  image: ubuntu:14.04.3

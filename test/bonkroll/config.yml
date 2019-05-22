@@ -1,0 +1,5 @@
+name: bonkroll 
+version: v0.1
+category: Orchestration
+labels:
+  io.rancher.certified: rancher
